@@ -1,0 +1,102 @@
+{
+  "languageModel": {
+    "types": [
+      {
+        "name": "LIST_OF_ANSWERS",
+        "values": [
+          {
+            "id": "0",
+            "name": {
+              "value": "Not at all",
+              "synonyms": []
+            }
+          },
+          {
+            "id": "1",
+            "name": {
+              "value": "Several days",
+              "synonyms": []
+            }
+          },
+          {
+            "id": "2",
+            "name": {
+              "value": "More than half the days",
+              "synonyms": []
+            }
+          },
+          {
+            "id": "3",
+            "name": {
+              "value": "Nearly every day",
+              "synonyms": []
+            }
+          }
+        ]
+      }
+    ],
+    "intents": [
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.NoIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.RepeatIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StartOverIntent",
+        "samples": [
+          "start questionnaire",
+          "new questionnaire",
+          "start",
+          "start new questionnaire"
+        ]
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.YesIntent",
+        "samples": []
+      },
+      {
+        "name": "AnswerIntent",
+        "samples": [
+          "the response is {Answer}",
+          "my response is {Answer}",
+          "is it {Answer}",
+          "{Answer} is my response"
+        ],
+        "slots": [
+          {
+            "name": "Answer",
+            "type": "LIST_OF_ANSWERS"
+          }
+        ]
+      },
+      {
+        "name": "AnswerOnlyIntent",
+        "samples": [
+          "{Answer}"
+        ],
+        "slots": [
+          {
+            "name": "Answer",
+            "type": "LIST_OF_ANSWERS"
+          }
+        ]
+      }
+    ],
+    "invocationName": "mood tracker"
+  }
+}

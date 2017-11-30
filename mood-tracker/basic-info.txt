@@ -1,0 +1,106 @@
+Name: Patient Health Questionnaire Tracker
+Invocation Name: mood tracker
+
+start Service Request:
+{
+  "session": {
+    "new": true,
+    "sessionId": "SessionId.f97f4bb1-e6f4-467d-9ae1-516cf47926fd",
+    "application": {
+      "applicationId": "amzn1.ask.skill.8fc668a2-96b9-487d-8f46-c74cbc15d44a"
+    },
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.ask.account.AG2YKO2EM337VPA3KZY2C7KGJQVTZ7XU2JBPTVXV2BRT6SY65DYHYPYG5I2IBFUE5ROQOQ5FGO6JLMK6DRY6YA3SFATLL2ZKUMXHCFSV5A5OCK4R2WPI2SUSLIDW24CLSENXL5M7XQHXBQROGQLIXZPK3OE4LHHLSGVWNO6BC2QQXCV5KYTLDCYTOKJV2VNKJICX2GLAUUTMA6Q"
+    }
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.9bdc49f5-64d6-4c01-860d-040ee940eaf8",
+    "intent": {
+      "name": "AMAZON.StartOverIntent",
+      "slots": {}
+    },
+    "locale": "en-US",
+    "timestamp": "2017-11-30T15:24:58Z"
+  },
+  "context": {
+    "AudioPlayer": {
+      "playerActivity": "IDLE"
+    },
+    "System": {
+      "application": {
+        "applicationId": "amzn1.ask.skill.8fc668a2-96b9-487d-8f46-c74cbc15d44a"
+      },
+      "user": {
+        "userId": "amzn1.ask.account.AG2YKO2EM337VPA3KZY2C7KGJQVTZ7XU2JBPTVXV2BRT6SY65DYHYPYG5I2IBFUE5ROQOQ5FGO6JLMK6DRY6YA3SFATLL2ZKUMXHCFSV5A5OCK4R2WPI2SUSLIDW24CLSENXL5M7XQHXBQROGQLIXZPK3OE4LHHLSGVWNO6BC2QQXCV5KYTLDCYTOKJV2VNKJICX2GLAUUTMA6Q"
+      },
+      "device": {
+        "supportedInterfaces": {}
+      }
+    }
+  },
+  "version": "1.0"
+}
+
+start Server Response: 
+{
+  "version": "1.0",
+  "response": {
+    "outputSpeech": {
+      "ssml": "<speak> <p>Welcome to the Patient Health Questionnaire Tracker. <break time='2s'/>Valid responses to questions are zero, one, two, or three. <break time='2s'/> If you need help, say, help.</p>  <p>Let's begin the questionnaire.</p>  <p>Over the last, 2 weeks, how often have you been bothered by any of the following problems?</p>  Question 1. Little interest or pleasure in doing things.  <p> <emphasis level=\"strong\">0</emphasis> . Not at all.</p>  <p> <emphasis level=\"strong\">1</emphasis> . Several days.</p>  <p> <emphasis level=\"strong\">2</emphasis> . More than half the days.</p>  <p> <emphasis level=\"strong\">3</emphasis> . Nearly every day.</p> </speak>",
+      "type": "SSML"
+    },
+    "card": {
+      "content": " <p>Welcome to the Patient Health Questionnaire Tracker. <break time='2s'/>Valid responses to questions are zero, one, two, or three. <break time='2s'/> If you need help, say, help.</p>  <p>Let's begin the questionnaire.</p>  <p>Over the last, 2 weeks, how often have you been bothered by any of the following problems?</p>  Question 1. Little interest or pleasure in doing things.  <p> <emphasis level=\"strong\">0</emphasis> . Not at all.</p>  <p> <emphasis level=\"strong\">1</emphasis> . Several days.</p>  <p> <emphasis level=\"strong\">2</emphasis> . More than half the days.</p>  <p> <emphasis level=\"strong\">3</emphasis> . Nearly every day.</p> ",
+      "title": "Patient Health Questionnaire Tracker"
+    },
+    "reprompt": {
+      "outputSpeech": {
+        "ssml": "<speak>Let's begin the questionnaire.</speak>",
+        "type": "SSML"
+      }
+    },
+    "speechletResponse": {
+      "outputSpeech": {
+        "ssml": "<speak> <p>Welcome to the Patient Health Questionnaire Tracker. <break time='2s'/>Valid responses to questions are zero, one, two, or three. <break time='2s'/> If you need help, say, help.</p>  <p>Let's begin the questionnaire.</p>  <p>Over the last, 2 weeks, how often have you been bothered by any of the following problems?</p>  Question 1. Little interest or pleasure in doing things.  <p> <emphasis level=\"strong\">0</emphasis> . Not at all.</p>  <p> <emphasis level=\"strong\">1</emphasis> . Several days.</p>  <p> <emphasis level=\"strong\">2</emphasis> . More than half the days.</p>  <p> <emphasis level=\"strong\">3</emphasis> . Nearly every day.</p> </speak>"
+      },
+      "card": {
+        "content": " <p>Welcome to the Patient Health Questionnaire Tracker. <break time='2s'/>Valid responses to questions are zero, one, two, or three. <break time='2s'/> If you need help, say, help.</p>  <p>Let's begin the questionnaire.</p>  <p>Over the last, 2 weeks, how often have you been bothered by any of the following problems?</p>  Question 1. Little interest or pleasure in doing things.  <p> <emphasis level=\"strong\">0</emphasis> . Not at all.</p>  <p> <emphasis level=\"strong\">1</emphasis> . Several days.</p>  <p> <emphasis level=\"strong\">2</emphasis> . More than half the days.</p>  <p> <emphasis level=\"strong\">3</emphasis> . Nearly every day.</p> ",
+        "title": "Patient Health Questionnaire Tracker"
+      },
+      "reprompt": {
+        "outputSpeech": {
+          "ssml": "<speak>Let's begin the questionnaire.</speak>"
+        }
+      },
+      "shouldEndSession": false
+    }
+  },
+  "sessionAttributes": {
+    "score": 0,
+    "currentQuestionIndex": 0,
+    "speechOutput": " <p>Over the last, 2 weeks, how often have you been bothered by any of the following problems?</p>  Question 1. Little interest or pleasure in doing things.  <p> <emphasis level=\"strong\">0</emphasis> . Not at all.</p>  <p> <emphasis level=\"strong\">1</emphasis> . Several days.</p>  <p> <emphasis level=\"strong\">2</emphasis> . More than half the days.</p>  <p> <emphasis level=\"strong\">3</emphasis> . Nearly every day.</p> ",
+    "repromptText": " <p>Over the last, 2 weeks, how often have you been bothered by any of the following problems?</p>  Question 1. Little interest or pleasure in doing things.  <p> <emphasis level=\"strong\">0</emphasis> . Not at all.</p>  <p> <emphasis level=\"strong\">1</emphasis> . Several days.</p>  <p> <emphasis level=\"strong\">2</emphasis> . More than half the days.</p>  <p> <emphasis level=\"strong\">3</emphasis> . Nearly every day.</p> ",
+    "questions": [
+      "Little interest or pleasure in doing things",
+      "Feeling down, depressed, or hopeless",
+      "Trouble falling or staying asleep, or sleeping too much",
+      "Feeling tired or having little energy",
+      "Poor appetite or overeating",
+      "Feeling bad about yourself—or that you are a failure or have let yourself or your family down",
+      "Trouble concentrating on things, such as reading the newspaper or watching television",
+      "Moving or speaking so slowly that other people could have noticed? Or the opposite—being so fidgety or restless that you have been moving around a lot more than usual",
+      "Thoughts that you would be better off dead or of hurting yourself in some way"
+    ]
+  }
+}
+
+
+Testing Instructions: Make sure to take the test to the end by answering all 9 questions. Use the help feature if you are stuck.
+
+Short Skill Description: Depression is a very serious and common mood disorder. This health questionnaire/tracker is help recognize the symptoms.
+
+Full Skill Description: The Patient Health Questionnaire Tracker is an Alexa Skill representation of the self-administered version of the PRIME-MD diagnostic instrument for common mental disorders. The PHQ-9 is the depression module, which scores each of the 9 DSM-IV criteria. Just say the number of the answer, from zero to three. Kroenke, Kurt, Robert L Spitzer, and Janet B W Williams. “The PHQ-9: Validity of a Brief Depression Severity Measure.” Journal of General Internal Medicine 16.9 (2001): 606–613. PMC. Web. 28 Nov. 2017. 
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1495268/
+
