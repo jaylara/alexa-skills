@@ -15,13 +15,12 @@ or in the "license" file accompanying this file. This file is distributed on an 
 
 'use strict';
 
-const Alexa = require('alexa-sdk');
-const http = require('http');
-
+const ALEXA = require('alexa-sdk');
+const HTTP = require('http');
 
 const APP_ID = undefined;  // TODO replace with your app ID (OPTIONAL).
 
-const languageStrings = {
+const LANGUAGE_STRINGS = {
     'en': {
         translation: {
             CARDS: [
@@ -42,7 +41,9 @@ const languageStrings = {
     },
 };
 
-const handlers = {
+const JSON_ENDPOINT = 'http://jaydata.herokuapp.com/cah'
+
+const HANDLERS = {
     'LaunchRequest': function () {
         this.emit('GetCardCombo');
     },
@@ -73,13 +74,50 @@ const handlers = {
     },
 };
 
+//returns formated card string using SSML
+function ssmlWhiteCard(card) {
+    return `<prosody pitch="x-high" volume="x-loud">${card}</prosody>`;
+} // end of ssmlWhiteCard()
+
+//draws 5 sets of cards and returns them: [ { blackCard: "", whiteCards: [...] }, ... ]
+function drawCardSets(blackCards, whiteCards) {
+    var selectedCardSets = [];
+    for (var b = 0; b < 5; b++) {
+        var index = Math.floor(Math.random() * blackCards.length);
+        var drawnBlackCard = blackCards[index].text.replace(/<[^>]+>/g, ' ');
+        var drawnWhiteCards =[];
+        if(drawnBlackCard.indexOf('_') != -1) {
+            for (var w = 0; w < parseInt(blackCards[index].pick); w++) {
+                drawnWhiteCards.push(whiteCards[Math.floor(Math.random() * whiteCards.length)])
+            }
+        }
+        else {
+            drawnWhiteCards.push(whiteCards[Math.floor(Math.random() * whiteCards.length)])
+        }
+        selectedCardSets.push({blackCard: drawnBlackCard, whiteCards: drawnWhiteCards});
+    } //end of for (drawing cards)
+    return selectedCardSets;
+} // end of drawCardSets()
+
+//returns formatted cards so that Alexa can say them.
+function createSpeechCardSets(drawnCardSets) {
+    var speechCardSets = [];
+    drawnCardSets.forEach((cardSet) => {
+        var out = cardSet.blackCard;
+        cardSet.whiteCards.forEach((card) => {
+            out = out.replace('_', ssmlWhiteCard(card));
+        });
+        speechCardSets.push(`<p>${out}</p>`);
+    });
+    return speechCardSets;
+} // end of createSpeechCardSets()
+
 exports.handler = function (event, context) {
-    const alexa = Alexa.handler(event, context);
+    const alexa = ALEXA.handler(event, context);
     alexa.APP_ID = APP_ID;
     // To enable string internationalization (i18n) features, set a resources object.
     //'http://jaydata.herokuapp.com/portfolio/blurbs'
-    var selectedCardSets = [];
-    http.get('http://jaydata.herokuapp.com/cah', function (res) {
+    HTTP.get(JSON_ENDPOINT, function (res) {
         var respString = '';
         console.log('Status Code: ' + res.statusCode);
 
@@ -89,47 +127,26 @@ exports.handler = function (event, context) {
 
         res.on('end', function () {
             var respObj = JSON.parse(respString);
-            var whiteCards = respObj.whiteCards;
-            var blackCards = respObj.blackCards;
+            if (!respObj.error) {
+                var drawnCardSets = drawCardSets(respObj.blackCards, respObj.whiteCards);
 
-            if (respObj.error) {
-                console.log("CAH Fact Error: " + respObj.error.message);
-            } else {
+                var speechCardSets = createSpeechCardSets(drawnCardSets);
 
-                for (var b = 0; b < 5; b++) {
+                var joinedSets = [speechCardSets.join("<break time='2s'/>")];
 
-                    var index = Math.floor(Math.random() * blackCards.length);
-                    var drawnBlackCard = blackCards[index].text.replace(/<[^>]+>/g, ' ');
-                    var drawnWhiteCards =[];
-                    if(drawnBlackCard.indexOf('_') != -1) {
-                        for (var w = 0; w < parseInt(blackCards[index].pick); w++) {
-                            drawnWhiteCards.push(whiteCards[Math.floor(Math.random() * whiteCards.length)])
-                        }
-                    }
-                    else {
-                        drawnWhiteCards.push(whiteCards[Math.floor(Math.random() * whiteCards.length)])
-                    }
-                    selectedCardSets.push({blackCard: drawnBlackCard, whiteCards: drawnWhiteCards});
-                }
-                var speechCardSets = [];
-                selectedCardSets.forEach((cardSet) => {
-                    var out = cardSet.blackCard;
-                    cardSet.whiteCards.forEach((card) => {
-                        out = out.replace('_', `<prosody pitch="x-high" volume="x-loud">${card}</prosody>`);
-                    });
-                    speechCardSets.push(`<p>${out}</p>`);
-                });
+                LANGUAGE_STRINGS['en'].translation.CARDS = joinedSets;
+                LANGUAGE_STRINGS['en-US'].translation.CARDS = joinedSets;
 
-                languageStrings['en'].translation.CARDS = speechCardSets.join("<break time='2s'/>");
-                languageStrings['en-US'].translation.CARDS = speechCardSets.join("<break time='2s'/>");
-
-                alexa.resources = languageStrings;
-                alexa.registerHandlers(handlers);
+                alexa.resources = LANGUAGE_STRINGS;
+                alexa.registerHandlers(HANDLERS);
                 alexa.execute();
-            }
+            } //end of if (no error)
+            else {
+                console.log("CAH Error: " + respObj.error.message);
+            } // end of else
         });
     }).on('error', function (e) {
         console.log("Communications error: " + e.message);
-    });
+    });//end of ajax request
 
-};
+};//end of handler
